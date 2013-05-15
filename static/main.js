@@ -50,7 +50,28 @@ setupFunctions["t1-get-email"] = function() {
     });
 };
 
-//setupFunctions["t2-get-password"] = function()
+setupFunctions["t2-get-password"] = function() {
+    $("#dialog input.password").on("click", function() {
+        var password = $("#dialog input.password").val();
+        send("password", {password: password})
+            .then(function(r) {
+                if (r.correct)
+                    switchTo("t4-password-good");
+                else
+                    switchTo("t5-password-wrong");
+            });
+                    
+    });
+
+    $("#dialog input.forgot").on("click", function() {
+        switchTo("t6-forgot-password-start");
+    });
+
+    $("#dialog input.hate").on("click", function() {
+        switchTo("t7-hate-password");
+    });
+
+};
     
 
 $(function() {
