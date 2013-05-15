@@ -2,3 +2,13 @@
 .hidden {
     display: none;
 }
+
+.dialog {
+    height: 200px;
+    width: 300px;
+    background-color: #ccf;
+}
+
+.dialog h2 {
+}
+

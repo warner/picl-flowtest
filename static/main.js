@@ -1,18 +1,60 @@
 
 var currentlyShowing = null;
 
-function switchTo(which) {
-    function add() {
-        var entry = $("#templates ."+which).clone();
-        $("#dialog").empty().append(entry).show();
-    }
-    if (currentlyShowing) {
-        $("#dialog").hide(500, add);
-    } else {
-        add();
-    }
+var state = {};
+
+var setupFunctions = {};
+
+function send(verb, body) {
+    var d = $.Deferred();
+    $.ajax({type: "POST", url: "/api",
+            // what we send:
+            contentType: "application/json",
+            data: JSON.stringify({verb: verb, body: body}),
+            // what we expect:
+            dataType: "json",
+            success: d.resolve
+            });
+    return d;
 }
 
+function switchTo(which) {
+    function add() {
+        $("#dialog").empty();
+        console.log("showing", which);
+        var entry = $("#templates ."+which).clone();
+        $("#dialog").append(entry).fadeIn("fast",
+                                         function() {
+                                             currentlyShowing = which;
+                                             console.log(which);
+                                             var f = setupFunctions[which];
+                                             if (f)
+                                                 f();
+                                         });
+    }
+    $("#dialog").fadeOut("fast", add);
+}
+
+setupFunctions["t1-get-email"] = function() {
+    $("#dialog input.go").on("click", function() {
+        state.email = $("#dialog input.email").val();
+        console.log("clicked", state.email);
+        send("email", {email: state.email})
+            .then(function(r) {
+                if (r.known)
+                    switchTo("t2-get-password");
+                else
+                    switchTo("t3-create-account");
+            });
+                    
+    });
+};
+
+//setupFunctions["t2-get-password"] = function()
+    
+
 $(function() {
-    switchTo("t1");
+    console.log("starting");
+    switchTo("t1-get-email");
+    //window.setTimeout(function() {switchTo("t2-get-password");}, 5000);
 });

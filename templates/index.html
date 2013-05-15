@@ -10,13 +10,24 @@
 <body>
 <h1>Hello {{ name }}</h1>
 
+<div id="dialog"></div>
+
 <!-- templates -->
 <div id="templates" class="hidden">
-  <div class="t1 dialog">
-    <p>T1 Template</p>
+  <div class="t1-get-email dialog">
+    <center><h2>Welcome To PICL</h2></center>
+    <p>Enter your email address to get started.</p>
+    <span>Email: </span><input type="text" name="email" class="email"></input>
+    <input type="button" class="go" value="Go!"></input>
   </div>
-  <div class="t2 dialog">
-    <p>T2 Template</p>
+  <div class="t2-get-password dialog">
+    <center><h2>Welcome Back</h2></center>
+    <p>Please enter your password to connect this device to your account</p>
+    <span>Password: </span><input type="password" class="password"></input>
+    <input type="button" class="go" value="Go!"></input>
+    <p>Or use one of these:</p>
+    <input type="button" class="forgot" value="I Forgot My Password"></input>
+    <input type="button" class="hate" value="I Hate Passwords"></input>
   </div>
 </div>
 
