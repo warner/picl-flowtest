@@ -10,7 +10,7 @@ function send(verb, body) {
     $.ajax({type: "POST", url: "/api",
             // what we send:
             contentType: "application/json",
-            data: JSON.stringify({verb: verb, body: body}),
+            data: JSON.stringify({sessionID: sessionID, verb: verb, body: body}),
             // what we expect:
             dataType: "json",
             success: d.resolve
