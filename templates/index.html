@@ -16,16 +16,24 @@ var sessionID = {{ sessionID }};
 
 <div id="dialog"></div>
 
+<div id="notes-container">
+  <center>Implementor Notes</center>
+  <div id="notes"></div>
+</div>
+
 <!-- templates -->
 <div id="templates" class="hidden">
-  <div class="t1-get-email dialog">
+  <div class="t1-get-email">
     <center><h2>Welcome To PICL</h2></center>
     <p>Enter your email address to get started.</p>
     <span>Email: </span><input type="text" name="email" class="email"></input>
     <input type="button" class="go" value="Go!"></input>
   </div>
+  <div class="notes-t1-get-email">
+    <p>username: <b>known</b> / password: <b>password</b></p>
+  </div>
 
-  <div class="t2-get-password dialog">
+  <div class="t2-get-password">
     <center><h2>Welcome Back</h2></center>
     <p>Please enter your password to connect this device to your account</p>
     <span>Password: </span><input type="password" class="password"></input>
@@ -33,8 +41,11 @@ var sessionID = {{ sessionID }};
     <p>Or use one of these:</p>
     <input type="button" class="hate" value="I Hate Passwords"></input>
   </div>
+  <div class="notes-t2-get-password">
+    <p>username: <b>known</b> / password: <b>password</b></p>
+  </div>
 
-  <div class="t3-create-account dialog">
+  <div class="t3-create-account">
     <center><h2>Create Account</h2></center>
     <p>It looks like you don't have an account yet.</p>
     <p>Please create a PICL password</p>
@@ -45,19 +56,19 @@ var sessionID = {{ sessionID }};
     <input type="button" class="generated-password"></input>
   </div>
 
-  <div class="t4-password-good dialog">
+  <div class="t4-password-good">
     <center><h2>Device Attached</h2></center>
     <p>Good password! This device is now attached to your PICL account. Data will begin syncing momentarily.</p>
     <p>Time to be happy!</p>
   </div>
 
-  <div class="t4a-account-created dialog">
+  <div class="t4a-account-created">
     <center><h2>Account Created</h2></center>
     <p>We've created an account for you! This device is now attached to your PICL account. Data will begin syncing momentarily.</p>
     <p>Time to be happy!</p>
   </div>
 
-  <div class="t5-password-wrong dialog">
+  <div class="t5-password-wrong">
     <center><h2>Rats, Wrong Password!</h2></center>
     <p>It looks like that password was wrong. Don't you hate passwords?</p>
     <!-- we will rate-limit the number of attempts. When this is in force,
@@ -65,7 +76,7 @@ var sessionID = {{ sessionID }};
     <input type="button" class="again" value="Try again!"></input>
   </div>
 
-  <div class="t7-hate-password dialog">
+  <div class="t7-hate-password">
     <center><h2>I HATE PASSWORDS</h2></center>
     <p>We do too.</p>
     <p>If you have other devices attached to your account, you can use them to attach this one, without using passwords at all.
@@ -73,7 +84,7 @@ var sessionID = {{ sessionID }};
     <p>If you don't know your password, you can reset your account and establish a new password. This will delete all the class-B data on the server, though. <input type="button" class="reset" value="Reset Account"></input></p>
   </div>
 
-  <div class="t8-reset-account-start dialog">
+  <div class="t8-reset-account-start">
     <center><h2>Reset Account 1</h2></center>
     <p>To reset your account, you'll need to verify your email.</p>
     <p>We just sent an email to <span class="email" />. Inside it, you'll find a number. Please paste in that number here:</p>
@@ -82,7 +93,7 @@ var sessionID = {{ sessionID }};
     <input type="button" class="go" value="Go!"></input>
   </div>
 
-  <div class="t8a-reset-account-bad-code dialog">
+  <div class="t8a-reset-account-bad-code">
     <center><h2>Bad Code</h2></center>
     <p>It looks like that code was wrong. Don't you hate codes?</p>
     <p>Let's try again.</p>
@@ -91,7 +102,7 @@ var sessionID = {{ sessionID }};
     <input type="button" class="again" value="Try again!"></input>
   </div>
 
-  <div class="t9-reset-account-set-password dialog">
+  <div class="t9-reset-account-set-password">
     <center><h2>Reset Account 2</h2></center>
     <p>Now that you've verified your email, please choose a new PICL password:</p>
     <span>Password: </span><input type="password" class="password"></input>
@@ -101,26 +112,26 @@ var sessionID = {{ sessionID }};
     <input type="button" class="generated-password"></input>
   </div>
 
-  <div class="t10-reset-account-commit dialog">
+  <div class="t10-reset-account-commit">
     <center><h2>Reset Account 3</h2></center>
     <p>To confirm that you really want to reset the account (and delete class-B data held on the server), please press here:</p>
     <input type="button" class="reset" value="Reset!"></input>
   </div>
 
-  <div class="t11-reset-account-done dialog">
+  <div class="t11-reset-account-done">
     <center><h2>Reset Account 4</h2></center>
     <p>Your account has been reset. All other devices have been disconnected. This device is now connected, and data will begin syncing momentarily.</p>
     <p>You must re-connect all other devices to allow them to resume syncing too.</p>
     <p>Be happy!</p>
   </div>
 
-  <div class="t12-pair-start dialog">
+  <div class="t12-pair-start">
     <center><h2>Pair Devices</h2></center>
     <p>Your account has <span class="count" /> devices already connected. <span class="active-count" /> of these are currently showing a confirmation message. Please click "OK" on one of them.</p>
     <p>(pretend to click one, then click <input type="button" class="ok" value="OK"></input>)</p>
   </div>
 
-  <div class="t13-pair-more dialog">
+  <div class="t13-pair-more">
     <center><h2>Pair Devices</h2></center>
     <p>Please type the following code into the input box on the other device:</p>
     <div class="code"></div>
@@ -128,13 +139,13 @@ var sessionID = {{ sessionID }};
     <p>(or <input type="button" class="wrong" value="wrong"></input> to pretend you typed the code wrong)</p>
   </div>
 
-  <div class="t14-pair-done dialog">
+  <div class="t14-pair-done">
     <center><h2>Pairing Complete</h2></center>
     <p>This device is now connected. Data will begin syncing momentarily.</p>
     <p>Be happy!</p>
   </div>
 
-  <div class="t15-pair-wrong dialog">
+  <div class="t15-pair-wrong">
     <center><h2>Bad Code</h2></center>
     <p>It looks like that code was wrong. Don't you hate codes?</p>
     <p>Let's try again.</p>

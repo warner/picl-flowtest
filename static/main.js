@@ -19,18 +19,21 @@ function send(verb, body) {
 }
 
 function switchTo(which) {
+    function done() {
+        var notes = $("#templates .notes-"+which);
+        if (notes.length)
+            $("#notes").empty().append(notes.clone());
+        currentlyShowing = which;
+        console.log(which);
+        var f = setupFunctions[which];
+        if (f)
+            f();
+    }
     function add() {
         $("#dialog").empty();
         console.log("showing", which);
         var entry = $("#templates ."+which).clone();
-        $("#dialog").append(entry).fadeIn("fast",
-                                         function() {
-                                             currentlyShowing = which;
-                                             console.log(which);
-                                             var f = setupFunctions[which];
-                                             if (f)
-                                                 f();
-                                         });
+        $("#dialog").append(entry).fadeIn("fast", done);
     }
     $("#dialog").fadeOut("fast", add);
 }

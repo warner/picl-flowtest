@@ -3,12 +3,25 @@
     display: none;
 }
 
-.dialog {
+div#dialog {
     height: 300px;
     width: 400px;
     background-color: #ccf;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.dialog h2 {
+div#dialog h2 {
 }
+
+div#notes-container {
+    height: 200px;
+    width: 300px;
+    background-color: #fdd;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    padding: 5px;
+}
+
 
