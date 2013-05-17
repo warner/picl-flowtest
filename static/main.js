@@ -18,11 +18,22 @@ function send(verb, body) {
     return d;
 }
 
+function enterMeansClick(inputSelector, buttonSelector) {
+    $(inputSelector).on("keyup", function(e) {
+        if (e.keyCode == 13)
+            $(buttonSelector).click();
+        return false;
+    });
+}
+
 function switchTo(which) {
     function done() {
         var notes = $("#templates .notes-"+which);
         if (notes.length)
             $("#notes").empty().append(notes.clone());
+        var focus = $("#dialog .focus");
+        if (focus.length == 1)
+            focus.focus();
         currentlyShowing = which;
         console.log(which);
         var f = setupFunctions[which];
@@ -39,6 +50,7 @@ function switchTo(which) {
 }
 
 setupFunctions["t1-get-email"] = function() {
+    enterMeansClick("#dialog input.email", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         state.email = $("#dialog input.email").val();
         console.log("clicked", state.email);
@@ -54,6 +66,7 @@ setupFunctions["t1-get-email"] = function() {
 };
 
 setupFunctions["t2-get-password"] = function() {
+    enterMeansClick("#dialog input.password", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var password = $("#dialog input.password").val();
         send("attach", {password: password})
@@ -109,6 +122,7 @@ setupFunctions["t8-reset-account-start"] = function() {
     $("#dialog span.email").text(state.email);
     var code = "123-456-7890";
     $("#dialog span.code").text(code);
+    enterMeansClick("#dialog input.code", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var gotCode = $("#dialog input.code").val();
         $("#dialog input.code").hide(); // show "checking.." message
@@ -129,6 +143,7 @@ setupFunctions["t8a-reset-account-bad-code"] = function() {
 }; 
 
 setupFunctions["t9-reset-account-set-password"] = function() {
+    enterMeansClick("#dialog input.password", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         state.newPassword = $("#dialog input.password").val();
         switchTo("t10-reset-account-commit");

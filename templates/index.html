@@ -26,7 +26,7 @@ var sessionID = {{ sessionID }};
   <div class="t1-get-email">
     <center><h2>Welcome To PICL</h2></center>
     <p>Enter your email address to get started.</p>
-    <span>Email: </span><input type="text" name="email" class="email"></input>
+    <span>Email: </span><input type="text" name="email" class="email focus"></input>
     <input type="button" class="go" value="Go!"></input>
   </div>
   <div class="notes-t1-get-email">
@@ -36,7 +36,7 @@ var sessionID = {{ sessionID }};
   <div class="t2-get-password">
     <center><h2>Welcome Back</h2></center>
     <p>Please enter your password to connect this device to your account</p>
-    <span>Password: </span><input type="password" class="password"></input>
+    <span>Password: </span><input type="password" class="password focus"></input>
     <input type="button" class="go" value="Go!"></input>
     <p>Or use one of these:</p>
     <input type="button" class="hate" value="I Hate Passwords"></input>
@@ -49,7 +49,7 @@ var sessionID = {{ sessionID }};
     <center><h2>Create Account</h2></center>
     <p>It looks like you don't have an account yet.</p>
     <p>Please create a PICL password</p>
-    <span>Password: </span><input type="password" class="password"></input>
+    <span>Password: </span><input type="password" class="password focus"></input>
     <input type="button" class="go" value="Go!"></input>
     <p>We can also create a random password for you:</p>
     <!-- script will set .value to a randomly generated password -->
@@ -89,7 +89,7 @@ var sessionID = {{ sessionID }};
     <p>To reset your account, you'll need to verify your email.</p>
     <p>We just sent an email to <span class="email" />. Inside it, you'll find a number. Please paste in that number here:</p>
     <p>(pretend you got an email with <span class="code" />)</p>
-    <span>Code: </span><input type="text" name="code" class="code"></input>
+    <span>Code: </span><input type="text" name="code" class="code focus"></input>
     <input type="button" class="go" value="Go!"></input>
   </div>
 
@@ -105,7 +105,7 @@ var sessionID = {{ sessionID }};
   <div class="t9-reset-account-set-password">
     <center><h2>Reset Account 2</h2></center>
     <p>Now that you've verified your email, please choose a new PICL password:</p>
-    <span>Password: </span><input type="password" class="password"></input>
+    <span>Password: </span><input type="password" class="password focus"></input>
     <input type="button" class="go" value="Go!"></input>
     <p>We can also create a random password for you:</p>
     <!-- script will set .value to a randomly generated password -->
