@@ -40,7 +40,7 @@ function switchTo(which) {
             $("#all-accounts").empty();
             for (var name in accounts) {
                 // never do this in real code
-                var s = ("<li>username: <b>"+name+"</b> / password: <b>"+
+                var s = ("<li>email: <b>"+name+"</b> / password: <b>"+
                          accounts[name].password+"</b></li>");
                 $("#all-accounts").append($(s));
             };
