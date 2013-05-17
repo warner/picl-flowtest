@@ -5,7 +5,7 @@ var state = {};
 
 var setupFunctions = {};
 
-function send(verb, body) {
+function send(verb, body={}) {
     var d = $.Deferred();
     $.ajax({type: "POST", url: "/api",
             // what we send:
@@ -31,6 +31,16 @@ function switchTo(which) {
         var notes = $("#templates .notes-"+which);
         if (notes.length)
             $("#notes").empty().append(notes.clone());
+        send("list-all-accounts").then(function(accounts) {
+            console.log("accounts", accounts);
+            $("#all-accounts").empty();
+            for (var name in accounts) {
+                // never do this in real code
+                var s = ("<li>username: <b>"+name+"</b> / password: <b>"+
+                         accounts[name].password+"</b></li>");
+                $("#all-accounts").append($(s));
+            };
+        });
         var focus = $("#dialog .focus");
         if (focus.length == 1)
             focus.focus();
@@ -102,7 +112,6 @@ setupFunctions["t3-create-account"] = function() {
             .then(function(r) {
                 switchTo("t4a-account-created");
             });
-                    
     });
 
     var randomPW = "correct-horse-battery-staple";
