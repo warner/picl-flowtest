@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import random
+import random, time
 from flask import Flask, render_template, request, jsonify
 
 class State:
@@ -59,6 +59,7 @@ def api():
         return jsonify(code=code)
 
     if verb == "got-reset-code":
+        time.sleep(1)
         if body["code"] == state.expectedCode:
             state.email = state.tryingForEmail
             return jsonify(correct=True)

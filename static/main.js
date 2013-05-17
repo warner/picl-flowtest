@@ -146,7 +146,7 @@ setupFunctions["t8-reset-account-start"] = function() {
     enterMeansClick("#dialog input.code", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var gotCode = $("#dialog input.code").val();
-        $("#dialog input.code").hide(); // show "checking.." message
+        $("#dialog div.code-input").empty().append($("<span>Checking code..</span>"));
         send("got-reset-code", {code: gotCode})
             .then(function(r) {
                 if (r.correct)
