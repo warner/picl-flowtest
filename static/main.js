@@ -110,6 +110,7 @@ setupFunctions["t2-get-password"] = function() {
 };
 
 setupFunctions["t3-create-account"] = function() {
+    enterMeansClick("#dialog input.password", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var password = $("#dialog input.password").val();
         send("create-account", {password: password})
@@ -146,7 +147,7 @@ setupFunctions["t8-reset-account-start"] = function() {
     $("#dialog input.go").on("click", function() {
         var gotCode = $("#dialog input.code").val();
         $("#dialog input.code").hide(); // show "checking.." message
-        send("got-code", {code: gotCode})
+        send("got-reset-code", {code: gotCode})
             .then(function(r) {
                 if (r.correct)
                     switchTo("t9-reset-account-set-password");
@@ -192,18 +193,29 @@ setupFunctions["t10-reset-account-commit"] = function() {
 };
 
 setupFunctions["t12-pair-start"] = function() {
-    $("#dialog input.ok").on("click", function() {
+    var side = showSidechannel("t12-pair-start");
+    side.find("input.ok").on("click", function() {
         switchTo("t13-pair-more");
     });
 };
 
 setupFunctions["t13-pair-more"] = function() {
-    $("#dialog div.code").text("123-456");
-    $("#dialog input.ok").on("click", function() {
-        switchTo("t14-pair-done");
+    send("create-pair-code", {}).then(function(r) {
+        $("#dialog span.code").text(r.code).addClass("show-code");
     });
-    $("#dialog input.wrong").on("click", function() {
-        switchTo("t15-pair-wrong");
+    var side = showSidechannel("t13-pair-more");
+    enterMeansClick("#sidechannel-container input.code",
+                    "#sidechannel-container input.go");
+    side.find("input.code").focus();
+    side.find("input.go").on("click", function() {
+        var gotCode = side.find("input.code").val();
+        send("got-pair-code", {code: gotCode})
+        .then(function(r) {
+            if (r.correct)
+                switchTo("t14-pair-done");
+            else
+                switchTo("t15-pair-wrong");
+        });
     });
 };
 

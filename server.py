@@ -58,7 +58,7 @@ def api():
         state.expectedCode = code
         return jsonify(code=code)
 
-    if verb == "got-code":
+    if verb == "got-reset-code":
         if body["code"] == state.expectedCode:
             state.email = state.tryingForEmail
             return jsonify(correct=True)
@@ -68,6 +68,18 @@ def api():
         print "reset-account", body["password"]
         accounts[state.email]["password"] = body["password"]
         return jsonify(ok=True)
+
+    if verb == "create-pair-code":
+        code = "%03d-%03d" % (random.randrange(1000),
+                              random.randrange(1000))
+        state.expectedPairCode = code
+        return jsonify(code=code)
+
+    if verb == "got-pair-code":
+        if body["code"] == state.expectedPairCode:
+            state.email = state.tryingForEmail
+            return jsonify(correct=True)
+        return jsonify(correct=False)
 
     return jsonify(error="unknown verb")
 

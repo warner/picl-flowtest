@@ -134,15 +134,22 @@ var sessionID = {{ sessionID }};
   <div class="t12-pair-start">
     <center><h2>Pair Devices</h2></center>
     <p>Your account has <span class="count" /> devices already connected. <span class="active-count" /> of these are currently showing a confirmation message. Please click "OK" on one of them.</p>
-    <p>(pretend to click one, then click <input type="button" class="ok" value="OK"></input>)</p>
+  </div>
+  <div class="side-t12-pair-start">
+    <p>pretend this is one of your other devices</p>
+    <p>click <input type="button" class="ok" value="OK"></input></p>
   </div>
 
   <div class="t13-pair-more">
     <center><h2>Pair Devices</h2></center>
     <p>Please type the following code into the input box on the other device:</p>
-    <div class="code"></div>
-    <p>(pretend to do that, then click <input type="button" class="ok" value="OK"></input>)</p>
-    <p>(or <input type="button" class="wrong" value="wrong"></input> to pretend you typed the code wrong)</p>
+    <div><span class="code show-code"></span></div>
+  </div>
+  <div class="side-t13-pair-more">
+    <p>pretend this is the other device</p>
+    <p>type the code in here:</p>
+    <span>Code: </span><input type="text" name="code" class="code focus"></input>
+    <input type="button" class="go" value="Go!"></input>
   </div>
 
   <div class="t14-pair-done">
@@ -157,7 +164,7 @@ var sessionID = {{ sessionID }};
     <p>Let's try again.</p>
     <!-- we will rate-limit the number of attempts. When this is in force,
     the button will be gray and a countdown timer will be shown until the block expires. The server enforces the limit, of course, but the client helps prevent surprises by stalling until it knows the limit has expired. -->
-    <input type="button" class="again" value="Try again!"></input>
+    <input type="button" class="again focus" value="Try again!"></input>
   </div>
 
 
