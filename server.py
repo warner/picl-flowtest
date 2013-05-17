@@ -77,6 +77,7 @@ def api():
         return jsonify(code=code)
 
     if verb == "got-pair-code":
+        time.sleep(1)
         if body["code"] == state.expectedPairCode:
             state.email = state.tryingForEmail
             return jsonify(correct=True)

@@ -209,6 +209,7 @@ setupFunctions["t13-pair-more"] = function() {
     side.find("input.code").focus();
     side.find("input.go").on("click", function() {
         var gotCode = side.find("input.code").val();
+        $("#sidechannel-container div.code-input").empty().append($("<span>Checking code..</span>"));
         send("got-pair-code", {code: gotCode})
         .then(function(r) {
             if (r.correct)
