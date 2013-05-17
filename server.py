@@ -15,6 +15,11 @@ def root():
     sessionID = random.randrange(1000000)
     return render_template("one.html", name="Bob", sessionID=sessionID)
 
+@app.route("/two")
+def two():
+    sessionID = random.randrange(1000000)
+    return render_template("two.html", name="Bob", sessionID=sessionID)
+
 
 @app.route("/api", methods=["POST"])
 def api():
