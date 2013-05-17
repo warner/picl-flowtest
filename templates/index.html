@@ -16,6 +16,11 @@ var sessionID = {{ sessionID }};
 
 <div id="dialog"></div>
 
+<div id="sidechannel-container">
+  <center>Side Channel</center>
+  <div id="sidechannel"></div>
+</div>
+
 <div id="notes-container">
   <center>Implementor Notes</center>
   <div id="notes"></div>
@@ -88,9 +93,12 @@ var sessionID = {{ sessionID }};
     <center><h2>Reset Account 1</h2></center>
     <p>To reset your account, you'll need to verify your email.</p>
     <p>We just sent an email to <span class="email" />. Inside it, you'll find a number. Please paste in that number here:</p>
-    <p>(pretend you got an email with <span class="code" />)</p>
     <span>Code: </span><input type="text" name="code" class="code focus"></input>
     <input type="button" class="go" value="Go!"></input>
+  </div>
+  <div class="side-t8-reset-account">
+    <p>pretend you just got an email with the code:</p>
+    <p><span class="show-code" /></p>
   </div>
 
   <div class="t8a-reset-account-bad-code">

@@ -14,14 +14,28 @@ div#dialog {
 div#dialog h2 {
 }
 
-div#notes-container {
+div#sidechannel-container {
     height: 200px;
     width: 300px;
     background-color: #fdd;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    padding: 5px;
+}
+
+div#notes-container {
+    height: 200px;
+    width: 300px;
+    background-color: #ff8;
     position: absolute;
     right: 5px;
     bottom: 5px;
     padding: 5px;
 }
 
-
+span.show-code {
+    font-family: fixed;
+    font-weight: bold;
+    font-size: 150%;
+}

@@ -46,7 +46,17 @@ function switchTo(which) {
         var entry = $("#templates ."+which).clone();
         $("#dialog").append(entry).fadeIn("fast", done);
     }
+    $("#sidechannel-container").fadeOut("fast");
     $("#dialog").fadeOut("fast", add);
+}
+
+function showSidechannel(which) {
+    var container = $("#sidechannel-container");
+    container.empty();
+    var template = $("#templates .side-"+which).clone();
+    container.append(template);
+    container.fadeIn("slow");
+    return template;
 }
 
 setupFunctions["t1-get-email"] = function() {
@@ -121,7 +131,8 @@ setupFunctions["t7-hate-password"] = function() {
 setupFunctions["t8-reset-account-start"] = function() {
     $("#dialog span.email").text(state.email);
     var code = "123-456-7890";
-    $("#dialog span.code").text(code);
+    var side = showSidechannel("t8-reset-account");
+    side.find("span.show-code").text(code);
     enterMeansClick("#dialog input.code", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var gotCode = $("#dialog input.code").val();
