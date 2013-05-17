@@ -13,7 +13,7 @@ app = Flask("flowserver")
 @app.route("/")
 def root():
     sessionID = random.randrange(1000000)
-    return render_template("index.html", name="Bob", sessionID=sessionID)
+    return render_template("one.html", name="Bob", sessionID=sessionID)
 
 
 @app.route("/api", methods=["POST"])
