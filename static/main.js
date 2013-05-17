@@ -18,6 +18,10 @@ function send(verb, body={}) {
     return d;
 }
 
+function generatePassword() {
+    return "correct-horse-battery-staple";
+}
+
 function enterMeansClick(inputSelector, buttonSelector) {
     $(inputSelector).on("keyup", function(e) {
         if (e.keyCode == 13)
@@ -114,10 +118,8 @@ setupFunctions["t3-create-account"] = function() {
             });
     });
 
-    var randomPW = "correct-horse-battery-staple";
-    $("#dialog input.generated-password").attr("value", randomPW);
     $("#dialog input.generated-password").on("click", function() {
-        $("#dialog input.password").val(randomPW);
+        $("#dialog input.password").val(generatePassword());
     });
 
 };
@@ -139,9 +141,7 @@ setupFunctions["t7-hate-password"] = function() {
 
 setupFunctions["t8-reset-account-start"] = function() {
     $("#dialog span.email").text(state.email);
-    var code = "123-456-7890";
-    var side = showSidechannel("t8-reset-account");
-    side.find("span.show-code").text(code);
+
     enterMeansClick("#dialog input.code", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         var gotCode = $("#dialog input.code").val();
@@ -154,6 +154,12 @@ setupFunctions["t8-reset-account-start"] = function() {
                     switchTo("t8a-reset-account-bad-code");
             });
     });
+
+    send("create-reset-code").then(function(r) {
+        var side = showSidechannel("t8-reset-account");
+        side.find("span.show-code").text(r.code);
+    });
+
 };
 
 setupFunctions["t8a-reset-account-bad-code"] = function() {
@@ -166,13 +172,12 @@ setupFunctions["t9-reset-account-set-password"] = function() {
     enterMeansClick("#dialog input.password", "#dialog input.go");
     $("#dialog input.go").on("click", function() {
         state.newPassword = $("#dialog input.password").val();
+        // hide the stretching behind an extra user confirmation click
         switchTo("t10-reset-account-commit");
     });
 
-    var randomPW = "correct-horse-battery-staple";
-    $("#dialog input.generated-password").attr("value", randomPW);
     $("#dialog input.generated-password").on("click", function() {
-        $("#dialog input.password").val(randomPW);
+        $("#dialog input.password").val(generatePassword());
     });
 };
 

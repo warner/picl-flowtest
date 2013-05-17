@@ -12,7 +12,7 @@ app = Flask("flowserver")
 
 @app.route("/")
 def root():
-    sessionID = random.randint(0, 1000000)
+    sessionID = random.randrange(1000000)
     return render_template("index.html", name="Bob", sessionID=sessionID)
 
 
@@ -51,13 +51,22 @@ def api():
         state.email = state.tryingForEmail
         return jsonify(ok="ok")
 
+    if verb == "create-reset-code":
+        code = "%03d-%03d-%04d" % (random.randrange(1000),
+                                   random.randrange(1000),
+                                   random.randrange(10000))
+        state.expectedCode = code
+        return jsonify(code=code)
+
     if verb == "got-code":
-        if body["code"] == "123-456-7890":
+        if body["code"] == state.expectedCode:
+            state.email = state.tryingForEmail
             return jsonify(correct=True)
         return jsonify(correct=False)
 
     if verb == "reset-account":
         print "reset-account", body["password"]
+        accounts[state.email]["password"] = body["password"]
         return jsonify(ok=True)
 
     return jsonify(error="unknown verb")

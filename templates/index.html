@@ -54,11 +54,10 @@ var sessionID = {{ sessionID }};
     <center><h2>Create Account</h2></center>
     <p>It looks like you don't have an account yet.</p>
     <p>Please create a PICL password</p>
-    <span>Password: </span><input type="password" class="password focus"></input>
+    <span>Password: </span><input type="text" class="password focus"></input>
     <input type="button" class="go" value="Go!"></input>
-    <p>We can also create a random password for you:</p>
-    <!-- script will set .value to a randomly generated password -->
-    <input type="button" class="generated-password"></input>
+    <p>We can also generate a random password for you:</p>
+    <input type="button" class="generated-password" value="Generate Password"></input>
   </div>
 
   <div class="t4-password-good">
@@ -115,9 +114,8 @@ var sessionID = {{ sessionID }};
     <p>Now that you've verified your email, please choose a new PICL password:</p>
     <span>Password: </span><input type="password" class="password focus"></input>
     <input type="button" class="go" value="Go!"></input>
-    <p>We can also create a random password for you:</p>
-    <!-- script will set .value to a randomly generated password -->
-    <input type="button" class="generated-password"></input>
+    <p>We can also generate a random password for you:</p>
+    <input type="button" class="generated-password" value="Generate Password"></input>
   </div>
 
   <div class="t10-reset-account-commit">
