@@ -31,6 +31,24 @@ var sessionID = {{ sessionID }};
 
 <!-- templates -->
 <div id="templates" class="hidden">
+  <div class="t1-start">
+    <center><h2>Welcome To PICL</h2></center>
+    <div class="t1-tabs">
+      <ul>
+        <li><a href="#t1-tab-create">Create Account</a></li>
+        <li><a href="#t1-tab-sign-in">Sign In</a></li>
+      </ul>
+      <div class="t1-tab-create">
+        <p>Enter your email address to get started.</p>
+        <span>Email: </span><input type="text" name="email" class="email focus"></input>
+        <input type="button" class="go" value="Go!"></input>
+        <span>Password: </span><input type="password" class="password focus"></input>
+        <input type="button" class="go" value="Go!"></input>
+      </div>
+      <div class="t1-tab-sign-in">
+      </div>
+  </div>
+
   <div class="t1-get-email">
     <center><h2>Welcome To PICL</h2></center>
     <p>Enter your email address to get started.</p>
@@ -43,8 +61,6 @@ var sessionID = {{ sessionID }};
   <div class="t2-get-password">
     <center><h2>Welcome Back</h2></center>
     <p>Please enter your password to connect this device to your account</p>
-    <span>Password: </span><input type="password" class="password focus"></input>
-    <input type="button" class="go" value="Go!"></input>
     <p>Or use one of these:</p>
     <input type="button" class="hate" value="I Hate Passwords"></input>
   </div>
